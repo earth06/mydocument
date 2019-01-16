@@ -3,7 +3,7 @@
 # 文のルール
 FORTRAN77の文構造は変数を宣言したりメモリを確保したりする非実行文と演算やファイル入出力を行う実行文とに分かれる。また、大文字と小文字の区別がないので、例えばA,aはどちらも同じ文字としてコンパイラには解釈されます。区別がないといっても可読性の観点からFORTRANの制御構文を大文字で書き、変数を小文字で記述することが多いようです。
 
-```fortran:test.F
+```fortran
        PROGRAM test      !プログラム開始文
        
        IMPLICIT NONE      !暗黙の型宣言の無効化
@@ -192,7 +192,9 @@ CONTINUE文は'何も処理を行わない'という実行文です。`ENDDO`の
 
 以上をふまえて基本のループと文番号を用いたループで九九を画面に表示するプログラムを書いておきます。
 
-```fortran:loop1.F
+loop1.F
+
+```fortran
 !基本のループ
       PROGRAM MAIN
       IMPLICIT NONE
@@ -205,7 +207,9 @@ CONTINUE文は'何も処理を行わない'という実行文です。`ENDDO`の
       END
 ```
 
-```fortran:loop2.F
+loop2.F
+
+```fortran
 !文番号を用いたループ
       PROGRAM MAIN
       IMPLICIT NONE

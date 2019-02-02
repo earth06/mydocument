@@ -165,6 +165,7 @@ We can use conditional jump as many as you like and `if statements` can be neste
 
 ## comparison operators 
 Here I introduce comparison operators which is used in conditional expression.
+
 |conditional expression|character vr.|when return True|
 |:----|:-----|:-----|
 |a > b|.GT.|a is greater than b|
@@ -176,6 +177,7 @@ Here I introduce comparison operators which is used in conditional expression.
 
 ## logical operator
 When we want to evaluate two conditional expression at the sametime , we can use logical operater.
+
 |symbol|when return True|
 |:----|:----|
 |( expression A ) .AND. ( expression B )|conditional expression A is True and expression B is also True|

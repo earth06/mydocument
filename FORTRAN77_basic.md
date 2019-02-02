@@ -45,16 +45,18 @@ Actually We can set any symbol except numerical character at 6th letter.
 コメント行はコンパイル時に無視される行で、`*`や`!`を用いて行のコメントアウトを行います。
 `*`を用いてコメントアウトするときは`*`を行頭に置かなけれなりません。
 `!`を用いてコメントアウトするときは`!`を行のどこに置いてもよく、`!`から行末までをコメントアウトします。
-Comment line is the line which is ignored when compiled
+Comment line is the line which is ignored when compiled.
+We have to put '*' at head of line to comment.
+We can put '!' wherever you want to comment out in its line . See below
+
 ```fortran
-!利用例
-* コメント
-! コメント
-      a + b   !ここから行末までコメント
+
+* this lien is comment
+! this line is also comment
+      a + b   !comment from '!' to edn of line
 ```
 
-# FORTRAN77の変数
- 
+# Variable and data types in FORTRAN77
 FORTRANはpythonとかと違い、変数の型推論をやってくれないので事前に型を定めて変数を宣言する必要があります。
 ただ、その前にやっておいたほうがよいことが、暗黙の型宣言の無効化です。
 

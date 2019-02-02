@@ -1,6 +1,6 @@
 # FORTRAN77  basic syntax
 
-FORTRAN77 　roughly have two construction.
+FORTRAN77 roughly have two construction.
  One is unexecutable statement which declare variable , set initial value and save memory for caliculation.
 The other is executabel statement which execute caliculation by using variable declared in unexecutable statement. So excecutable statement must be writted after unexcecutable statement. 
  FORTRAN77 doesn't distinguish between capital letter and  lower caseletter . For example 'A' and 'a' will be recognized as same character. Even though ,to improved redability some people use capital letter for control syntax (eg. DO, ENDDO,IF etc...) and use lower case for variable name.
@@ -185,45 +185,43 @@ When we want to evaluate two conditional expression at the sametime , we can use
 
 
 
-# DOループによる繰り返し
-## 基本的な使い方
+# Loop by DO statement
+## How to use DO loop 
 
 ```fortran
-     INTEGER i  !カウンタ変数
+     INTEGER i  !Here we used i for counter variable for loop
 
-     DO i=<開始値>,<限界値>,<増分値>  !増分値は負でもよい
-           <処理>
+     DO i=<start value>,<limitation value>,<increment or decrement> 
+           statement
      ENDDO
-     <処理2>
+     statement
 ```
-ここでは変数iをDOループのカウンタ変数として使用しています。カウンタ変数は整数でないとダメです。
-iにはループの初回に<開始値>が代入されます。ループの中の<処理>が終わるとiの値は<増分値>だけ加算され、加算されたiの値が<限界値>以下であるとき繰り返し処理を行い、iが<限界値>を上回ったとき繰り返し処理を行わずにDO文の下の<処理2>に移ります。
-<増分値>は省略することができ、その場合は増分値は1として扱われます。
-DOループもif文と同様に多重にすることができますがループがクロスすることは許されません。
 
-## 文番号を用いるパターン
-文番号を用いるDOループは今後廃止予定みたいですが、それはFORTRAN77には関係ない話で、私が使用している数値モデルのソースにはがっつり使用されているのでその使用例も書いておきます。
+Here we are using `i` as counter variable fot DO statement. Counter variable must be declared as integer.
+`i` is set to `<start value>` when program into loop. `i` value is updated  at end of executable statement in loop then go to start of loop and `i` value is evaluated. If `i` is under `limitation value` , executable statement in loop is carried out again　otherwise  program go to out of loop.
+When <increment or decrement> is omitted ,FORTRAN77 regard <icrement or decrement>  as 'increment=1'.
+`DO statement` also can be nested
+
+## DO loop with sentence number
 
 ```fortran
       INTEGER i
-      DO <文番号> i=<開始値>,<限界値>,<増分値>
+      DO XXXXX i=<start value>,<limitation value>,<increment or decrement>
 
-<文番号>  CONTINUE
+XXXXX CONTINUE
 ```
+`XXXXX` is sentence number
+### how to use sentence number
+To set <sentence number> we write under 5-digit integer in head of line. Each sentence number must be set unique value in one program.
+<sentence number> is often used to set `end of DO loop` or to set `FORMAT statement`
 
-### 文番号
-文番号は行の先頭に5桁以下の整数を定めます。一つのプログラム中に同じ文番号を定めることはできません。
-ループの終点や変数を出力するときのformatを指定するときに文番号は使われます。文番号の決め方にルールはありませんが、プログラムを書くときはダブらないように自分の中でルールを定めておくとよいでしょう。
+### CONTINUE statement
+`CONTINUE statement` do nothing. This statement is used in place of `ENDDO`
+By using two types `DO loop`,I introduce program to display multiple table
 
-### CONTINUE文
-CONTINUE文は'何も処理を行わない'という実行文です。`ENDDO`の代わりに用いられます。
-
-以上をふまえて基本のループと文番号を用いたループで九九を画面に表示するプログラムを書いておきます。
-
-loop1.F
-
+basic_loop.F
 ```fortran
-!基本のループ
+!basic loop
       PROGRAM MAIN
       IMPLICIT NONE
       INTEGER i,j
@@ -235,10 +233,9 @@ loop1.F
       END
 ```
 
-loop2.F
-
+loop_by_continue.F
 ```fortran
-!文番号を用いたループ
+!loop by sentence number
       PROGRAM MAIN
       IMPLICIT NONE
       INTEGER i,j
@@ -246,7 +243,7 @@ loop2.F
         DO 10 j=1,9
            WRITE(*,*)i ,'X', j ,'=',i*j
 
-10    CONTINUE   !文番号を用いる場合ループの終点を共有することができる。
+10    CONTINUE   !when use sentence number , end point of DO loop can be shared
       END
 ```
 

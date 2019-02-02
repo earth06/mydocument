@@ -1,6 +1,4 @@
-
-
-# FORTRAN77 syntax
+# FORTRAN77  basic syntax
 
 FORTRAN77 　roughly have two construction.
  One is unexecutable statement which declare variable , set initial value and save memory for caliculation.
@@ -57,7 +55,7 @@ We can put '!' wherever you want to comment out in its line . See below
 # Variable and data types in FORTRAN77
 
 
-FORTRAN77 is static typing language. So we have to declare variable with data type before executable sentence.
+FORTRAN77 is static typing language. So we have to declare variable with data type before executable part.
 But FORTRAN77 have implicit data typing . This default feature makes us confused. So it is recommended to disable it . 
 
 ## Disable implicit data typing
@@ -98,77 +96,90 @@ When we write real number , We often use exponent notation by using 'E' or 'D'
       b=0.1D-1   !b = 0.10 X 10^-1
       b=-5.0D10  !b = -5.0 X 10^10
 ```
-## 文字型(character)
-文字型を宣言するときはその変数が所持できる文字数も同時に記述する必要があります。
+## character
+When we declare character ,We have to decribe number of letters which variable can save  
 
 ```fortran
-     CHARACTER  char*10   !このときcharは10文字だけ文字を格納することができる
+     CHARACTER  char*10   !
 ```
-## 論理型(logical)
+In this case, `char` variable can save 10 letters.
+## logical
+This data type can take only `.TRUE.` or `.False.` as value
+This is often used in `IF` statement.
 ```fortran
       LOGICAL  flag
-!論理型がとる値は.TRUE.と.FALSE.の2つだけ 
+      
       DATA flag / .TRUE. / 
       IF ( flag )THEN
          flag = .FALSE.
       ENDIF
 ```
-## DATA文による変数への初期値の代入
-変数を宣言した後に以下のようにDATA文を使用することでその変数に初期値を代入することができます。初期値の代入はプログラムの実行に入る前に1度だけ行われます。
+
+## set initial value by using DATA statement
+We can set initial value after declaration. This substitution is done only one time before executable part.
 
 ```fortran
       REAL*8 x
       INTEGER count
+      CHARACTER char*7
       DATA x / 0.d0 /
       DATA count / 0 /
+      DATA char /'FORTRAN'/
 ```
 
-## PARAMETER文による定数の設定
-これまで扱ってきたものは変数であり、プログラムの実行文中でその値を変更することができました。ここでは変数を宣言した後にPARAMETER文を用いて定数を定めます。PARAMETER文で定められた定数は実行文中で変更することはできません。
+## Set constant value by using PARAMETER sentence
+Variable introduced above can be changed in executable sentence.
+Here, we introduce the way to set constant value.
+Once we set constant value ,we can't change its value in executable part.
 
 ```fortran
-      REAL re
+      REAL er
       REAL*8 pi
-      PARAMETER ( re = 6400e3)            !()は必要
-      PARAMETER ( pi = atan(1.D0)*4.D0 )  !宣言時に関数を使ってもOK
+      PARAMETER ( er = 6400e3)            !`()` is necessary
+      PARAMETER ( pi = atan(1.D0)*4.D0 )  !we can use  built-in function 
 ```
 　
-　
-ここまでで変数と定数の宣言を見てきました。
 
-次はいよいよFORTRAN77の制御構文に入ります。
-#IF文による条件分岐
-条件式が真のときそれに対応する実行文を実行します。
-分岐はいくつに分けてもよく、またIF文の中にIF文を記述する多重構造になっても構いません。(ただしIF文がクロスすることは不可能)
+I introduced data types until here. 
+Next, We'll introduce control syntax of FORTRAN77 in executable part.
+#IF statement
+If conditional expression is True , corresponding statements is carried out.  
+We can use conditional jump as many as you like and `if statements` can be nested one inside the other. 
 
 ```fortran
-     IF ( 条件式1 ) THEN
-          実行文1
-     ELSE IF ( 条件式2 ) THEN
-          実行文2
+     IF ( conditional expression 1 ) THEN
+          executabel statement1
+     ELSE IF ( conditional expression 2 ) THEN
+          executable statement2
      ELSE THEN
-          実行文3
+          executable statement3
+     ENDIF
+     
+!nested if statement
+     IF (condition) THEN
+        IF (condition) THEN
+           write(*,*)'hello world'
+        ENDIF
      ENDIF
 ```
 
-## 条件式に用いられる比較演算子
-
-|条件式|文字表記|真を返す条件|
+## comparison operators 
+Here I introduce comparison operators which is used in conditional expression.
+|conditional expression|character vr.|when return True|
 |:----|:-----|:-----|
-|a > b|.GT.|aはbより大きい|
-|a >= b|.GE.|aはb以上|
-|a < b|.LT.|aはbより小さい|
-|a <= b|.LE.|aはb以下|
-|a == b|.EQ.|aとbは等しい|
-|a /= b|.NE.|aとbは等しくない|
+|a > b|.GT.|a is greater than b|
+|a >= b|.GE.|a is greater than or equal to b|
+|a < b|.LT.|a is less than b|
+|a <= b|.LE.|a is less than or equal to b|
+|a == b|.EQ.|a is equal to b|
+|a /= b|.NE.|a is not equal to b|
 
-## 論理演算子
-複数の条件式を同時に判定するときには論理演算子を用います。
-
-|記号|真を返す条件|
+## logical operator
+When we want to evaluate two conditional expression at the sametime , we can use logical operater.
+|symbol|when return True|
 |:----|:----|
-|( 条件式A ) .AND. ( 条件式B )|条件式Aが真かつ条件式Bが真|
-|( 条件式A ) .OR. ( 条件式B )|条件式Aが真または条件式Bが真|
+|( expression A ) .AND. ( expression B )|conditional expression A is True and expression B is also True|
+|( expression A ) .OR. ( expression B )|conditional expression A is True or B is True|
 
 
 

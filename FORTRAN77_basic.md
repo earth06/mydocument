@@ -23,12 +23,12 @@ main.F
 !OUTPUT  12
 ```
 
-## limitation the number of letter in one line
+## Limitation the number of letter in one line
 
 FORTRAN77 limit the maximum number of letters in one line as 72 letters. letters which exceed the limitation will be ignored when compile. Moreover from first letter to  sixth letter must be used for other way (eg. sentence number or FORMAT sentence etc...). Details will be decribed below. 
 So we can only use 66 letters between 7th and 72th letter .
 
-## continuation line
+## Continuation line
 
 As mentioned above , FORTRAN77 have limitaion about the number of letters but we can escape the maximum limitaion of letters by using symbol for continuation line. The way is to write '$' or '&' at 6th letter in next line. See below. this is example of declare string type array 'MON' and set initial value into it.
 
@@ -42,9 +42,7 @@ As mentioned above , FORTRAN77 have limitaion about the number of letters but we
 Actually We can set any symbol except numerical character at 6th letter. 
 
 ## Comment line
-コメント行はコンパイル時に無視される行で、`*`や`!`を用いて行のコメントアウトを行います。
-`*`を用いてコメントアウトするときは`*`を行頭に置かなけれなりません。
-`!`を用いてコメントアウトするときは`!`を行のどこに置いてもよく、`!`から行末までをコメントアウトします。
+
 Comment line is the line which is ignored when compiled.
 We have to put '*' at head of line to comment.
 We can put '!' wherever you want to comment out in its line . See below
@@ -57,41 +55,46 @@ We can put '!' wherever you want to comment out in its line . See below
 ```
 
 # Variable and data types in FORTRAN77
-FORTRANはpythonとかと違い、変数の型推論をやってくれないので事前に型を定めて変数を宣言する必要があります。
-ただ、その前にやっておいたほうがよいことが、暗黙の型宣言の無効化です。
 
-## 暗黙の型宣言の無効化
-暗黙の型宣言を無効化すると、宣言していない変数が実行文中に使われているとコンパイル時にエラーになります。
-タイプミスなどのヒューマンエラーをプログラム実行前に除去できるので、利用が推奨されています。
 
-次にそれぞれの型の変数宣言の例を紹介していきます。
-## 整数型(integer)
-整数は4byteで表されるので、$-2^{31} \sim  2^{31}-1$ の整数値をとることができます。
+FORTRAN77 is static typing language. So we have to declare variable with data type before executable sentence.
+But FORTRAN77 have implicit data typing . This default feature makes us confused. So it is recommended to disable it . 
+
+## Disable implicit data typing
+``` fortran
+      PROGRAM MAIN
+      implicit none  !disable implicit data type
+```
+By using `implicit none` ,FORTRAN77 output compile error when we use undeclared variable in our source code.
+
+
+Next I introduce Fortran77 data types
+## integer
+integer is represented in 4byte so its range is $-2^{31} \sim  2^{31}-1$ 
 
 ```fortran
-!宣言例
+!ex)
        INTEGER i
-!複数同時に
+!ex)  declare more than two integer at the same time
        INTEGER i,j,k 
 ```
-## 実数型(real)
-実数は4byteで表される単精度(デフォルト)と8byteで表される倍精度をとります。
-
+## real
+real number is represented in 4byte (default) or 8byte(double precision) 
 ```fortran
-!単精度
+!singel precision(4byte)
       REAL  a
-!倍精度
+!double precision(8byte)
       REAL*8 b
 ```
 
-### 実数の表記法
-実数値を記述するときはE,Dを用いた指数表記を使うことが多いです。
-
+### real number notation
+When we write real number , We often use exponent notation by using 'E' or 'D' 
+ 
 ```fortran
-!単精度実数ではEを使う
+!E is used in single precision
       a=1e0      !a = 1.0
       a=1E5      !a = 1.0 X 10^5
-!倍精度実数ではDを使う
+!D is used in double precision
       b=0.1D-1   !b = 0.10 X 10^-1
       b=-5.0D10  !b = -5.0 X 10^10
 ```
@@ -233,10 +236,7 @@ loop2.F
 10    CONTINUE   !文番号を用いる場合ループの終点を共有することができる。
       END
 ```
-# 次回の予定
-次回はサブルーチンの使い方やファイル入出力、プリプロセッサによる条件付きコンパイル、NAMELISTによる変数の代入などをまとめていきたいと思います。
 
-# 参考文献
+# Reference
 富田博之・斎藤泰洋　共著「Fortran 90/95プログラミング」(2011年 改訂新版)
 
-（この書籍はFortran90/95を対象としているがFORTRAN77式の文法も紹介されており、大変助けられた。）

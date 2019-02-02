@@ -1,41 +1,51 @@
-研究室で使われている数値モデルがFORTRAN77で書かれているので、せっかくなのでモデルのソースコードに登場する文法を中心にまとめることにしました(ほとんど自分用ですが...)。今回はFORTRAN77の基本文法に着目して記述していきます。
 
-# 文のルール
-FORTRAN77の文構造は変数を宣言したりメモリを確保したりする非実行文と演算やファイル入出力を行う実行文とに分かれる。また、大文字と小文字の区別がないので、例えばA,aはどちらも同じ文字としてコンパイラには解釈されます。区別がないといっても可読性の観点からFORTRANの制御構文を大文字で書き、変数を小文字で記述することが多いようです。
 
+# FORTRAN77 syntax
+
+FORTRAN77 　roughly have two construction.
+ One is unexecutable statement which declare variable , set initial value and save memory for caliculation.
+The other is executabel statement which execute caliculation by using variable declared in unexecutable statement. So excecutable statement must be writted after unexcecutable statement. 
+ FORTRAN77 doesn't distinguish between capital letter and  lower caseletter . For example 'A' and 'a' will be recognized as same character. Even though ,to improved redability some people use capital letter for control syntax (eg. DO, ENDDO,IF etc...) and use lower case for variable name.
+
+
+main.F
 ```fortran
-       PROGRAM test      !プログラム開始文
-       
-       IMPLICIT NONE      !暗黙の型宣言の無効化
-       INTEGER a,b        !変数を宣言
-       a = 5              !以下実行分の例
+       PROGRAM MAIN      !program declaration
+       IMPLICIT NONE      !ignore implicit data type
+       INTEGER a,b        !declare variable (Data type is integer in this case)
+
+!executable statement start       
+       a = 5              
        b = 7
        WRITE(*,*)a+b
 
-       END                !プログラム終了文
+       END   PROGRAM MAIN       !end point of this program
 !OUTPUT  12
 ```
 
-## 文字数制限
-FORTRAN77は一行に書き込みできる文字数が72桁分と指定されておりそれをはみ出すと、それ以降の文字は無視されてしまう。そのため指定の文字数を超える場合は改行を行わなければならない。また行の1桁目から6桁目は後述するが、文番号など、別の用途に用いられるため使用できない。したがって、一行に書くことのできる文字数は7桁～72桁目の66文字だけです。
+## limitation the number of letter in one line
 
-## 改行記号
-長い数式とかを記述しているとよく文字数の限界に到達してしまいますが、以下のように行の6桁目に`$`または`&`を置くことで改行し、続けてプログラムを記述することができます。
-改行時には1行目の文字数を制限いっぱいまで埋める必要はありません。
+FORTRAN77 limit the maximum number of letters in one line as 72 letters. letters which exceed the limitation will be ignored when compile. Moreover from first letter to  sixth letter must be used for other way (eg. sentence number or FORMAT sentence etc...). Details will be decribed below. 
+So we can only use 66 letters between 7th and 72th letter .
+
+## continuation line
+
+As mentioned above , FORTRAN77 have limitaion about the number of letters but we can escape the maximum limitaion of letters by using symbol for continuation line. The way is to write '$' or '&' at 6th letter in next line. See below. this is example of declare string type array 'MON' and set initial value into it.
 
 ```fortran
-!文字型変数の1次元配列MONに月名を初期値として代入する例
-      CHARACTER MON(12)*3
+      CHARACTER MON(12)*3  !declare array which have 12 element and each element can save 3 characters
       DATA  MON / 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 
-     $            'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec' /    
+     $            'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec' /    !space is ignored when compiled
 
 ```
 
-## コメント行
+Actually We can set any symbol except numerical character at 6th letter. 
+
+## Comment line
 コメント行はコンパイル時に無視される行で、`*`や`!`を用いて行のコメントアウトを行います。
 `*`を用いてコメントアウトするときは`*`を行頭に置かなけれなりません。
 `!`を用いてコメントアウトするときは`!`を行のどこに置いてもよく、`!`から行末までをコメントアウトします。
-
+Comment line is the line which is ignored when compiled
 ```fortran
 !利用例
 * コメント

@@ -50,11 +50,11 @@ array.F
            WRITE(*,*)arr(i,j)    !access speed become faster when we access from inner element because we can access its memory continuously
         ENDDO
       ENDDO
-!ex2)  1行あたり5個、10行で出力
+!ex2) output 10lines and each line have 5 element
       DO i=1,10
-        WRITE(*,100)(new(i,j),j=1,5)  !この書き方で横方向に配列を展開できます
+        WRITE(*,100)(new(i,j),j=1,5)  !expand array toward horisontal
       ENDDO
-!ex3)  ex2+全ての配列要素を10倍して出力
+!ex3)  ex2)+ output with 10 times value without changing original array 
       DO i=1,10
         WRITE(*,100)(new(i,j)*10,j=1,5)
       ENDDO
@@ -63,37 +63,77 @@ array.F
       END
 
 ```
-result of example 1
+__result of example 1
 ```
+           1
+           2
+           3
+           4
+           5
+           6
+           7
+           8
+           9
+           .
+           .
+           .
 ```
 
-result of example 2
+__result of example 2
 ```
+    2    4    6    8   10
+    4    8   12   16   20
+    6   12   18   24   30
+    8   16   24   32   40
+   10   20   30   40   50
+   12   24   36   48   60
+   14   28   42   56   70
+   16   32   48   64   80
+   18   36   54   72   90
+   20   40   60   80  100
 ```
 
-result of example 3
+__result of example 3__
 ```
+   20   40   60   80  100
+   40   80  120  160  200
+   60  120  180  240  300
+   80  160  240  320  400
+  100  200  300  400  500
+  120  240  360  480  600
+  140  280  420  560  700
+  160  320  480  640  800
+  180  360  540  720  900
+  200  400  600  800 1000
 ```
-# ファイル入出力
-まずはじめにプログラムの外部からのデータを読み取や外部ファイルへのデータの書き込み方法について記述していきます。ファイル入出力は(1)OPEN, (2)READ or WRITE, (3)CLOSEの3ステップで行われます。以下詳しく解説していきます。
- 
-## OPEN文による外部ファイルのロード
-外部ファイルに入出力するにはOPEN文を用いてそのファイルをプログラムにロードする必要があります。
+In this case ,output is done on display. Nexr section I introduce how to output result as  file
+# File IO
+Basically file inuput and output is done by next three steps.
+1. OPEN statement
+2. READ and WRITE statement
+3. CLOSE statement
 
+See in detail. 
+## load external file into program by using OPEN statement
+
+We have to load external file on our program in order to input data from external file or output it to its file.
+Here we use `OPEN` statement
 ```fortran
-      OPEN(<ファイル装置番号>,file='<ファイル名>')
-!バイナリ形式で入出力したいとき
-      OPEN(<ファイル装置番号>,file='<ファイル名>',form='unformatted')
+! file IO by text format 
+      OPEN(<unit number>,file='<file name>')
+! file IO by binary format
+      OPEN(<unit number>,file='<file name>',form='unformatted')
 ```
-ファイルが存在していなければ新しくファイルを作成します。
-formを指定しない場合はファイルをテキスト形式で開きます。この場合、データ入出力の際はフォーマットを指定してあげなければなりません。`form='unformatted'`を記述した場合、データはバイナリ形式で読み書きされます。この場合はそのファイルは2進数で記録されているので直接開くことはできなくなりますが、入出力が高速になる・出力ファイルの容量に無駄がなくなる、などのメリットもあります。
+If `<file name>`file doesn't exist ,new file is created.
+File will be treated as text file if we don't set `form`. In this case we have to set `FORMAT` when READ or WRITE statement. See in later.
+If we set `form='unformatted'`,data which is input or output is treated as binarr. Because its file is written by baynary , we can't read it by using excel or Notepad but we can save file memory or make file faster than text file.   
 
-### 装置番号
+### Unit number
 OPEN文で指定する装置番号は整数(整数型変数でも可)で記述します。(前回の記事に出てきた文番号とは異なるので注意してください)
 5番と6番はREAD,WRITE文で予約されているので避けた方がよいでしょう。
 以後開いたファイルへの入出力はこの装置番号を用います
 
-##READ文・WRITE文によるデータの読み書き
+## READ文・WRITE文によるデータの読み書き
 READ文もWRITE文も基本的にとる引数は同じで第1引数には装置識別子を、第2引数にはフォーマットを定める書式識別子をとります。
 
 ```fortran

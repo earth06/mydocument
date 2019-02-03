@@ -28,7 +28,7 @@ If we skip `lower limit`,its value is set to 1 by default
       WRITE(*,*)arr(1)   !In this case ,output is '3' (arr(1)=3)
 ```
 ## example of array caliculation and output
-Here I introduce representative 
+Here I introduce representative array manipulation.
 
 array.F
 ```fortran
@@ -36,18 +36,18 @@ array.F
       IMPLICIT NONE
       INTEGER  arr(20,10),i,j
       INTEGER  new(10,5)
-      arr=0                         !配列の全ての要素に0を一度で代入、初期化によく使う
+      arr=0                         !set 0 into all array elements
       DO i=1,20
         DO j=1,10
-           arr(i,j)=i*j             !i行j列の配列要素にi*jを代入
+           arr(i,j)=i*j             !set i*j into i row j column element
         ENDDO
       ENDDO
-      new(:,:) = arr(1:10,1:5)      !arr配列の1~10行、1~5列をnew配列に代入
-      new(:,:) = new(:,:)*2         !new配列の全ての要素に2をかけたものをnew配列とする
-!ex1)  1行に1個、50行で出力
+      new(:,:) = arr(1:10,1:5)      !assign 1~10row、1~5column values of `arr` into `new` array
+      new(:,:) = new(:,:)*2         !assign values which was generate to multiply original `new` array by 2 into `new` array recusively
+!example of output 1
       DO j=1,5
         DO i=1,10
-           WRITE(*,*)arr(i,j)    !配列は内側の要素からアクセスしていくと、メモリに連続的にアクセスできるので処理が早くなる
+           WRITE(*,*)arr(i,j)    !access speed become faster when we access from inner element because we can access its memory continuously
         ENDDO
       ENDDO
 !ex2)  1行あたり5個、10行で出力
@@ -63,7 +63,17 @@ array.F
       END
 
 ```
+result of example 1
+```
+```
 
+result of example 2
+```
+```
+
+result of example 3
+```
+```
 # ファイル入出力
 まずはじめにプログラムの外部からのデータを読み取や外部ファイルへのデータの書き込み方法について記述していきます。ファイル入出力は(1)OPEN, (2)READ or WRITE, (3)CLOSEの3ステップで行われます。以下詳しく解説していきます。
  

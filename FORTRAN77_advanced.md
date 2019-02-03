@@ -1,33 +1,34 @@
-# 配列とその演算
-基本文法編の例文にも配列を登場させていましたが、配列として宣言した変数は複数の値を保持することができます。Fortranでは1次元だけでなく多次元の配列もシンプルかつ高速に扱うことができ、これがFortranが数値解析の分野で現役たらしめている特徴の1つと言ってもいいでしょう。(※もちろん多次元配列はFORTRAN77に固有の特徴ではありません。)
-## 配列宣言の基本
-配列の宣言は以下の通りです。下限、上限の値は整数(負の値も可)で与える必要があります。
-<下限>を指定しない場合はデフォルトで1が下限になります。
+# array and its caliculation
+Variable declared as array can save multiple value.Actually array was used in FORTRAN77 basic chapetr. Please check it.
+Fortran can treat not only one dimensional array but also multi dimensional array easily and fast. This is oen of the feature that Fortran is popular in numerical analysys even now.
 
+## How to declare array
 ```
-      型 配列名(<下限:>上限)
+      <datatype> variable_name(<lower limit:>upper limit)
 ```
+`lower limit` and `upper limit` should be set as integer (including nagative value)
+If we skip `lower limit`,its value is set to 1 by default
 
-### 配列宣言いろいろ
+### Various array declaration
 
 ```fortran
-      INTEGER iarr(10)      !配列番号は1~10
-      INTEGER iarr0(0:9)    !配列番号を0~9に指定(C言語式)
-      CHARACTER carr(64)*16 !64文字16行の1次元配列
-      REAL  farr(10,10)     !実数型の2次元配列
+      INTEGER iarr(10)      !index number :from 1 to 10
+      INTEGER iarr0(0:9)    !set index number from 0 to 9に指定(like C language)
+      CHARACTER carr(64)*16 !index number :from 1 to 64 & each element can save 16 letters
+      REAL  farr(10,10)     !10 X 10 :two dimensional array
 
-!!!!!!parameter文で定数を使って宣言
+!!!!!!set index number by using constant value
       INTEGER idim,jdim,kmax
       PARAMETER (idim=128,jdim=64,kmax=32)
-      REAL*8 dat(idim,jdim,kmax)
+      REAL*8 dat(idim,jdim,kmax) ! 128 X 64 X 36 :three dimensional array
 
-!!!!!!配列要素にアクセス
+!!!!!!how to accces each element
       INTEGER arr(3)
       DATA arr / 3, 2, 1  /
-      WRITE(*,*)arr(1)   !arr(1)=3が画面に出力されます。
+      WRITE(*,*)arr(1)   !In this case ,output is '3' (arr(1)=3)
 ```
-## 配列の演算と出力
-配列について細かいところまで書き出すと果てしないので、なるべく網羅した例を挙げて終わりにします。すみません。
+## example of array caliculation and output
+Here I introduce representative 
 
 array.F
 ```fortran

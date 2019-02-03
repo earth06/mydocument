@@ -63,7 +63,7 @@ array.F
       END
 
 ```
-__result of example 1
+__result of example 1__
 ```
            1
            2
@@ -79,7 +79,7 @@ __result of example 1
            .
 ```
 
-__result of example 2
+__result of example 2__
 ```
     2    4    6    8   10
     4    8   12   16   20
@@ -107,7 +107,7 @@ __result of example 3__
   200  400  600  800 1000
 ```
 In this case ,output is done on display. Nexr section I introduce how to output result as  file
-# File IO
+# File I/O
 Basically file inuput and output is done by next three steps.
 1. OPEN statement
 2. READ and WRITE statement
@@ -129,49 +129,61 @@ File will be treated as text file if we don't set `form`. In this case we have t
 If we set `form='unformatted'`,data which is input or output is treated as binarr. Because its file is written by baynary , we can't read it by using excel or Notepad but we can save file memory or make file faster than text file.   
 
 ### Unit number
-OPEN文で指定する装置番号は整数(整数型変数でも可)で記述します。(前回の記事に出てきた文番号とは異なるので注意してください)
-5番と6番はREAD,WRITE文で予約されているので避けた方がよいでしょう。
-以後開いたファイルへの入出力はこの装置番号を用います
+`Unit nuber` which is designated in `OPEN` statement has to be written in positive integer. 
+You can also use variable declared as integer for unit number
+(Unit number is different from sentence number)
+`5` and `6` are already reserved by FORTRAN77 systematically so we shoule avoid to use these number for unit number 
+Next , I intorduce file I/O by using `READ` or `WRITE` statement with unit number.
 
-## READ文・WRITE文によるデータの読み書き
+## File I/O by using READ and WRITE statement 
 READ文もWRITE文も基本的にとる引数は同じで第1引数には装置識別子を、第2引数にはフォーマットを定める書式識別子をとります。
 
 ```fortran
-      READ(<装置識別子>,<書式識別子>)<読み取ったデータを代入するリスト(変数とか)>
-      WRITE(<装置識別子>,<書式識別子>)<ファイルに書き込むデータのリスト(変数とか)>
+!reading file  (INPUT)
+      READ(<unit identifier>,<format identifier>)variables
+      
 ```
-### 装置識別子
+read data is substitute into variables which are put on right of READ()statement. 
+```fortran
+!writing data into file (OUTPUT)
+      WRITE(<unit identifier>,<format identifier>)variables
+```
+values of variables is output into file related to <unit identifier>  
+See below about unit identifier.
+### Unit identifier
 
-|装置識別子|意味|
+|unit identifier|mean|
 |:-----:|:----|
-|*|コンソール入出力|
-|装置番号|OPEN文でこの番号と関連づけられているファイルに対して入出力|
-|5|パンチカード時代の名残(らしい),使ったことないです|
-|6|同上|
-|文字型変数|入出力を文字変数に対して行う(詳しくは「数値と数字の変換」で紹介します)|
+|*|console input or output|
+|unit number| I/O target is file related into unit number designated by OPEN statement|
+|5|legacy of period that punch card were used for programing|
+|6| as above|
+| variable| I/O target is variable(this feature is intorduced later)|
 
-### 書式識別子の書き方
-書式識別子は編集記述子を用いて記述されます。書式識別子をREAD・WRITE文の第2引数渡す方法は２つあり、1つは直接記述する方法、もう一つはFORMAT文に書式識別子を記述し、その文番号を第2引数に渡す方法です。
-ここではどちらも紹介していきます。
-#### 編集記述子
-編集記述子の表中の`w,d,m,r`は正の整数値で以下の意味を持ちます。
+### How to write format identifier
+Format identifier is written in field discriptor.
+I show table of field discriptor before tell you about format identifier
 
-|記号|意味|
+#### Field discriptor 
+`w,d,m,r` in field discriptor table are positive values and have below mean
+
+|symbol|mean|
 |:---:|:-----|
-|w|記述欄の桁数|
-|d|実数型で、小数点より右側の桁数|
-|m|整数型で、数字を書く桁数|
-|r|反復回数|
+|w|total length of I/O data |
+|d|lenght after the decimal point,for `real` data type |
+|m|total length,for `integer` data type|
+|r|number of occurrence|
 
-__編集記述子__
+__field discriptor__
 
-|編集記述子|意味|備考|
+|field discriptor|mean|note|
 |:---:|:-----|:----------------|
-|[r]__I__w[.m]|10進整数をw桁の欄に右詰め,m桁の欄に空白がある場合0を代入|w>=m|  
-|[r]__E__w[.d]|実数型をw桁の欄に小数点以下d桁で指数形式で表示,仮数部は0.1~1.0になる|w>=d+7 |
-|[r]__A__[w]|文字型をw桁の欄で右詰め|
+|[r]__I__\w[.m]|10進整数をw桁の欄に右詰め,m桁の欄に空白がある場合0を代入|w>=m|  
+|[r]__E__\w[.d]|実数型をw桁の欄に小数点以下d桁で指数形式で表示,仮数部は0.1~1.0になる|w>=d+7 |
+|[r]__A__\[w]|文字型をw桁の欄で右詰め|
 |[r]__X__|スペース|
 
+書式識別子をREAD・WRITE文の第2引数に渡す方法は２つあり、1つは直接記述する方法、もう一つはFORMAT文に書式識別子を記述し、その文番号を第2引数に渡す方法です。
 #### 編集記述子を直接渡す方法
 
 ```fortran

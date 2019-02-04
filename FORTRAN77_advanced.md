@@ -178,10 +178,10 @@ __field discriptor__
 
 |field discriptor|mean|note|
 |:---:|:-----|:----------------|
-|[r]__I__'w[.m]|10進整数をw桁の欄に右詰め,m桁の欄に空白がある場合0を代入|w>=m|  
-|[r]__E__'w[.d]|実数型をw桁の欄に小数点以下d桁で指数形式で表示,仮数部は0.1~1.0になる|w>=d+7 |
-|[r]__A__[w]|文字型をw桁の欄で右詰め|
-|[r]__X__|スペース|
+|[r]__I__'w[.m]|rgiht-align integer value in `w`digit. IF space exist by `m` digit ,space is replaced to `0`|w>=m|  
+|[r]__E__'w[.d]|show real value `d` digit after decimal point in `w` digit as exponent.Mantisa range is from 0.1 to 1.0 |w>=d+7 |
+|[r]__A__[w]|right- align character in 'w' digit|
+|[r]__X__|oen space|
 
 書式識別子をREAD・WRITE文の第2引数に渡す方法は２つあり、1つは直接記述する方法、もう一つはFORMAT文に書式識別子を記述し、その文番号を第2引数に渡す方法です。
 #### 編集記述子を直接渡す方法

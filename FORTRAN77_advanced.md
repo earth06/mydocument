@@ -136,7 +136,7 @@ You can also use variable declared as integer for unit number
 Next , I intorduce file I/O by using `READ` or `WRITE` statement with unit number.
 
 ## File I/O by using READ and WRITE statement 
-READ文もWRITE文も基本的にとる引数は同じで第1引数には装置識別子を、第2引数にはフォーマットを定める書式識別子をとります。
+Basically both READ and WRITE statement recieve same arguments. We have to pass `unit identifier ` as first arugument and `format identifier` as second argument.
 
 ```fortran
 !reading file  (INPUT)
@@ -181,10 +181,10 @@ __field discriptor__
 |[r]__I__'w[.m]|rgiht-align integer value in `w`digit. IF space exist by `m` digit ,space is replaced to `0`|w>=m|  
 |[r]__E__'w[.d]|show real value `d` digit after decimal point in `w` digit as exponent.Mantisa range is from 0.1 to 1.0 |w>=d+7 |
 |[r]__A__[w]|right- align character in 'w' digit|
-|[r]__X__|oen space|
+|[r]__X__|one space|
 
-書式識別子をREAD・WRITE文の第2引数に渡す方法は２つあり、1つは直接記述する方法、もう一つはFORMAT文に書式識別子を記述し、その文番号を第2引数に渡す方法です。
-#### 編集記述子を直接渡す方法
+There are two ways to pass format identifier to second argument of `READ` and `WRITE` statement
+#### How to pass format identifier directly.
 
 ```fortran
       INTEGER i
@@ -195,22 +195,24 @@ __field discriptor__
       month = 'monthly'
       label = 'value'
       OPEN(10,file='output.text')
-      WRITE(10,'(2A16)')month,label
-      WRITE(10,'(I2.2,1X,E12.5)')i,a
-!書式識別子は文字型変数で与えてもよい
+      WRITE(10,'(2A16)')month,label   !-------(1)
+      WRITE(10,'(I2.2,1X,E12.5)')i,a  !-------(2)
+      
+! we can pass format identifier by using string variable
       formt = '(I2,E14.3)'
-      WRITE(10,formt)i,a
+      WRITE(10,formt)i,a              !-------(3)
 ```
-
-```text:output.text
-monthly         value
-08  0.12367E+13
- 8     0.124E+13
+__output__
+```text
+monthly         value    (1)
+08  0.12367E+13          (2)
+ 8     0.124E+13         (3)
 ```
+In this way, we have to treat format identifier as character data type
 #### FORMAT文を経由する方法
 
 ```fortran
-<文番号>   FORMAT(<書式識別子>)    !FORMATに渡す書式識別子は文字型ではない
+<sentence number>   FORMAT(<fromat identifier>)    !In this case , format identifier is not character
 ```
 先ほどと同様の例で書いてみます。
 
@@ -231,29 +233,28 @@ monthly         value
 300   FORMAT(I2,E14.3)
 ```
 
-結果は先ほどと同じになるので省略します。
-どちらの方法が良いかはよくわかりません。
-## CLOSE文でファイルを閉じる
-読み書きの必要がなくなったファイルはCLOSE文で閉じておきます。
+## Close file by CLOSE statement
+We should close file and release momory of computer when its file is necessary.
 
 ```fortran
-      CLOSE(<装置番号>)
+      CLOSE(<unit number>)
 ```
-# 文字の連結
+# Concatenation of character
 FORTRANで文字の連結を行うときは'`+`'の代わりに'`//`'を使います。
 
+We can use `//` when we want to concatenate more than two character.
 ```fortran:concat.F
       PROGRAM MAIN
       IMPLICIT NONE
       CHARACTER text*7
       DATA  text /'FORTRAN'/
       CHARACTER ver /' 77'/
-      WRITE(*,*)text//ver   !'FORTRAN77'が出力される
+      WRITE(*,*)text//ver   !output 'FORTRAN77'
       END
 ```
-## 数値と数字の変換
+## Convertion between numerical value and numerical character
 文字の連結は当然文字同士でしか行うことができないので、下の例のように、整数型や実数型の数値を文字として扱うには型の変換を行う必要があります。ところが、Fortranでは宣言した変数の型自体を変えることができないので、あらかじめ文字型の変数も宣言しておくことで、この問題に対処します。
-このとき`数値=>数字`の変換にはWRITE文を使います。
+このとき`numerical value=>numerical character`の変換にはWRITE文を使います。
 
 ```fortran
      WRITE(<出力先の文字型変数>,<数値型の書式識別子>)<文字型に変換したい数値型の変数>

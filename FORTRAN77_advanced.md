@@ -302,7 +302,7 @@ We can use `//` when we want to concatenate more than two character.
 数値モデルではしばしば1つのメインプログラムとその他膨大な数の副プログラムで構成されます。ここでは副プログラムを構成するサブルーチンの使い方についてまとめていきます。
 サブルーチンのイメージを下図に書いてみました。
 
-        ![subroutine](https://github.com/earth06/mydocument/blob/master/subroutine.png)
+![subroutine](https://github.com/earth06/mydocument/blob/master/subroutine.png)
       
 
 

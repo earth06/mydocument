@@ -155,13 +155,11 @@ $ ls -l
 
 ![permission.PNG](https://github.com/earth06/mydocument/blob/master/permission.PNG?raw=true)
 
-permission is represented as 10 characters.
+Permission is represented as 10 characters (In here,  `-rwxr-xr-x`)
 
-Here `-rwxr-xr-x`
+First character means  directory `d` , file `-` or link`l`
 
-First character means whether directory `d` , file `-` or link`l`
-
-The other character have meaning like this.     
+The other character has meaning like this.     
 
 | character |    meaning    | Number |
 | :-------: | :-----------: | :----: |
@@ -171,7 +169,11 @@ The other character have meaning like this.
 |     -     | No permision  |   0    |
 
 
-permission is different  depending on file owner , group and normal user
+
+Permission is different  depending on file owner , group and normal user
+
+
+
 |   target   | digit |
 | :--------: | :---: |
 | File owner |  2-4  |
@@ -188,14 +190,29 @@ chmod 755 <path> #-rwxr-xr-x
 
 ## Redirect  and File I/O 
 
-Your command result is outputted into your terminal window.
+Your command result is outputted into your terminal window basically.
+
+But your sometimes may want to record its result as log file in order to solve the problem.
+
+Then you can change the output into other file by using redirect. 
 
  ```bash
 $ echo 'Hello' > test.txt
 $ echo 'World' >> test.txt
 $ cat test.txt
-$echo 'over wright' > test.txt
+$echo 'over write' > test.txt
  ```
+
+```bash
+$ ls 2> log # error output is log
+$ ls >  log # standard output is log
+$ ls >  log 2>&1 #both error and standard output is log
+$ ls >/dev/null 2>&1 #throw output away
+#tcsh
+$ ls >&log 
+```
+
+
 
 **concatenate by using cat and redirect**
 
@@ -319,4 +336,3 @@ $ cal
 ```
 
 ```
-

@@ -1,4 +1,4 @@
-# Let's start Linux
+Let's start Linux
 
 ## Please start up command line
 
@@ -79,7 +79,7 @@ When you run `cd` without target path , the result is to move to your home direc
 
 
 
-## make your own directory
+## Make your own directory
 
 ```bash
 $ mkdir <dir>
@@ -89,9 +89,9 @@ $ mkdir -p <dir1>/<dir2>
 
 
 
-## file copy and move
+## File copy and move
 
-**copy**
+**Copy**
 
 ```bash
 $ cp <original path> <target path>
@@ -108,15 +108,15 @@ $ mv <original file> <target file>
 
 original file is deleted
 
-## link
+## Link
 
-**symbolic link**
+**Symbolic link**
 
 ```bash
 $ ln -s <target> <link name>
 ```
 
-## File controll
+## File control
 
 **show text file**
 
@@ -281,7 +281,7 @@ $ bg <job ID>
 
 
 
-# Let's handling Linux
+# Let's handle Linux
 
 ## Archivement
 
@@ -303,7 +303,7 @@ $ [Tab] support your command typing
 # check disk capacity
 $ du <directory>
 $ df 
-# show tree structure
+# show directory tree 
 $ tree <directory>
 # search 
 $ grep <keyword> -rl <directory>
@@ -322,17 +322,191 @@ $ cal
 
 
 
-## Environmental variables
+## Shell config
+
+your config file for shell is   `~/.cshrc`, `~/.tcshrc`  or `~/.bashrc`
+
+This config file is read once when the command line is started up.
+
+We can write `alias` and `environmental variables` on config file.
+
+### csh or tcsh
+
+**Alias**
+
+```bash
+alias <alias name> <real command>
+#e.g
+alias ls -F --color
+alias ll ls -l
+alias la ls -a
+```
+
+**Environmental variable**
+
+```bash
+setenv <ENV name> <value>
+```
+
+
+
+### bash
+
+**Alias**
+
+```bash
+alias <alias name>="<real command>"
+#e.g
+alias ls='ls -hF --color=auto' 
+alias ll='ls -l'
+alias la='ls -a'
+```
+
+**Environmental variable**
+
+```bash
+export <Env name>=<value>
+```
+
+
+
+When you want to check  original command of alias 
+
+, you can use `$ type <alias name>` or `$ which <command>`.
+
+Moreover you can check a `environmental variable` by using `$ echo $<envuronmental variable>`
+
+End of this section I'll introduce representative environmental variable.
+
+
+
+| Environmental variable |       meaning       |     value <br>(not always correct)      |
+| :--------------------: | :-----------------: | :-------------------------------------: |
+|          HOME          | your home directory |              /home/\<User>              |
+|          PATH          | command search path | /home/\<User>/bin:/usr/local/bin ...etc |
+|          USER          |   your user name    |              \<User name>               |
+|         SHELL          |  your login shell   |         /bin/bash or /bin/tcsh          |
 
 
 
 ## Shell script
 
+you can write multiple commands on `.sh` file in advance and run them at the same time.
+
+This is called shell script .
+
+I want to introduce the syntax but it is different whether your shell is B Shell or C Shell.   
+
+I'm used to using csh so I mainly explain csh grammar.
 
 
 
+When you make shell script, you have to write `shebang` at first line of that file.
 
+```bash
+#! /bin/bash
 
 ```
 
+```bash
+#! /bin/tsch -f
+set i = 1
 ```
+
+### csh
+
+#### declare variable
+
+* use `set`
+
+```bash
+set var = a #OK
+set var=a   # wrong
+set var =a  # wrong
+set var= a  # wrong
+
+# use array
+set arr = ( 10 20 30 40 )
+set mon = ( DJF MAM JJA SON )
+#access an each element
+$ echo $arr[1]
+#[OUT]
+10
+```
+
+#### Math Operators
+
+When you want to calculate with variables , you have to put `@` at beginning of the line. 
+
+```bash
+set i = 10
+echo $i
+# 10
+@ i = $i + 1
+echo $i
+#11
+```
+
+
+
+
+
+#### Conditionals and Loops 
+
+
+
+```bash
+if ( <conditional expression> ) then
+	<process>
+else if ( <conditional expression> ) then
+	<process>
+else
+	<process>
+endif
+
+```
+
+
+
+| Conditional expression | meaning                     |
+| :--------------------- | :-------------------------- |
+| int1 == int2           | int1 equal to int2          |
+| int1 != int2           | int1 is not equal to int2   |
+| int1 <  int2           | int1 is less than int2      |
+| int1 <= int2           | int1 is equal or less int2  |
+| int1 >  int2           | int1 is more than int2      |
+| int1 >= int2           | int1 is equal or more  int2 |
+
+**conditional expression for file **
+
+| Conditional expression | meaning                               |
+| :--------------------: | :------------------------------------ |
+|        -e file         | file is exist                         |
+|       ! -e file        | file is not exist                     |
+|        -d file         | file is exist and it is directory     |
+|        -h file         | file is exist and it is symbolic link |
+|        -f file         | file is exist and it is normal file   |
+
+**Loops**
+
+
+
+```bash
+while ( <conditional expression> )
+	<process>
+end
+```
+
+
+
+Before running the shell script , you may have to add execute permission into its file.
+
+```bash
+chmod 755 shellscript.sh
+```
+
+
+
+### bash
+
+誰か書いて！

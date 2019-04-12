@@ -135,11 +135,15 @@ please run `vimtutor` command when you want to know how to use vim editor.
 
 
 
-### Practice
+### Exercise
 
-Change directory to `/home/onishi/Exercise/Linux_basic/` then please search under its directory  for `readme.txt`
+1. Please copy `/home/onishi/Exercise/Linux_basic/` into your home directory.
+1. Change directory to `~/Linux_basic/` then please search under its directory  for `readme.txt`
 
-When you find it ,please open it by using command such as `less` or `cat`.
+This file is put at deep directory. It is not convenient for us to access it repeatedly. 
+
+3. Please make the link at your home directory.
+4. When you find it ,please open it.
 
 ## Permission
 
@@ -254,7 +258,7 @@ you can check job ID by using `jobs` command
 
 ``` bash
 #run a program with foreground 
-$ <command>
+$ <command>:
 #run a program with backgroud
 $ <command> &
 #Suspend a foreground job
@@ -283,7 +287,7 @@ $ bg <job ID>
 
 # Let's handle Linux
 
-## Archivement
+## Packing and Unpacking
 
 ```bash
 #compression
@@ -506,6 +510,26 @@ chmod 755 shellscript.sh
 ```
 
 
+
+#### Exercise
+
+1. copy `/home/onishi/mydocument/Linux_advance/` to `~`
+
+This directory have `./$iyy/test_${iyy}.txt` .
+
+2. Please copy its file into your new directory `Test` at once
+
+   You can use shell script
+
+Then each file have each text.
+
+3. Please concatenate its text and output into new file `test_all.txt`
+
+   I recommend you to use `cat` command. To solve this exercise you can use not only shell script but also
+
+   `cat` command with wild card.
+
+     
 
 ### bash
 

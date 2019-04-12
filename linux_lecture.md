@@ -134,11 +134,16 @@ $ vim file.txt
 please run `vimtutor` command when you want to know how to use vim editor.
 
 
+### Exercise1
+1. Please copy `/home/onishi/mydocument/` into your home directory
+2. change directory to `~/mydocument/Linux_biginer`
+3. Let's move to `./A => B=> A=> A` (step1)
+4. `move two upper directory` then  `B => A ` (step2)
+5. `move four upper directory` then `B => A => B =>A` (step3)
+6. `move three upper directory` then `B => B => A ` (step4)
+### Exercise2
 
-### Exercise
-
-1. Please copy `/home/onishi/Exercise/Linux_basic/` into your home directory.
-1. Change directory to `~/Linux_basic/` then please search under its directory  for `readme.txt`
+1. Change directory to `~/mydocumnet/Linux_basic/` then please search under its directory  for `readme.txt`
 
 This file is put at deep directory. It is not convenient for us to access it repeatedly. 
 

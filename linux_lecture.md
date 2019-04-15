@@ -141,6 +141,7 @@ please run `vimtutor` command when you want to know how to use vim editor.
 4. `move two upper directory` then  `B => A ` (step2)
 5. `move four upper directory` then `B => A => B =>A` (step3)
 6. `move three upper directory` then `B => B => A ` (step4)
+
 ### Exercise2
 
 1. Change directory to `~/mydocumnet/Linux_basic/` then please search under its directory  for `readme.txt`
@@ -149,6 +150,7 @@ This file is put at deep directory. It is not convenient for us to access it rep
 
 3. Please make the link at your home directory.
 4. When you find it ,please open it.
+5. Then plese link `readne.txt` under `~/mydocument/Linux_basic/` 
 
 ## Permission
 

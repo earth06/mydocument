@@ -6,7 +6,7 @@ If you don't have Linux Environment , please rely on other lab members.
 
 They must know the way to build it even if your PC is windows OS.
 
-!!`Terminal` = `Command Line` = `Shell` ⊃ {`bash`,`zsh`,`csh`,`tcsh`,`sh`}
+!!`Terminal` = `Shell` ⊃ {`bash`,`zsh`,`csh`,`tcsh`,`sh`} ⊃ `command line` 
 
 Be careful that Lab server's Login shell is `tcsh` while many Linux is `bash` . 
 
@@ -43,6 +43,12 @@ You can find  `bin/` ,`lib/`.
 * `ls -a` :show directory and file including hidden file
 
 * `ls -l` :show them with detailed information.
+
+## Keyboard shortcut
+
+
+
+
 
 ## Change your current directory
 

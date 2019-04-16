@@ -46,9 +46,33 @@ You can find  `bin/` ,`lib/`.
 
 ## Keyboard shortcut
 
+*  cursor moving
+
+|   Key   | result |
+| :--------: | :---: |
+| `Ctrl + b` |  move 1 digit backward(<=)  |
+| `Ctrl + f `|  move 1 digit forward(=>)  |
+| `Ctrl + a` |  move head of line  |
+| `Ctrl + e` |  move end of line     |
+| `Meta + b` |  move 1 word backward (<=)     |
+| `Meta + f` |  move 1 word forward  (=>)   |
 
 
+* Delete character
 
+|   Key   | result |
+| :--------: | :---: |
+| `BackSpace` or `Ctrl + h ` |  delete one character after cursor|
+| `Delete` or `Ctrl + d`|  delete one character at cursor  |
+| `Ctrl + w` | delete one word   |
+
+* Cut and yunk(paste)
+
+|   Key   | result |
+| :--------: | :---: |
+| `Ctrl + k` | delete from cursor to end of line|
+| `Ctrl + u `| delete from head of line to cursor |
+| `Ctrl + y `| insert contents which is deleted last|
 
 ## Change your current directory
 

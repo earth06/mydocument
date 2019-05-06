@@ -62,17 +62,16 @@ Let's make monthly temperature  as  `T_1, T_2, ... T_3` from  `T` by using shell
 
 **Q) concatenate each monthly data which made at previous section into one file. **
 
-<details>
-    <summary>Answer</summary>
-    <pre>
-    <code>
+<details><summary>Answer</summary><div>
+
 ```bash
 $ cat 2005/T 2006/T 2007/T 2008/T 2009/T > T.yy
 ```
-    </code>
-    </pre>
-</details>
+</div></details>
+
 **Q) **
+
+
 
 Then please make `T.mm` from `T` at the same time by  updating  Ch.2 script.
 

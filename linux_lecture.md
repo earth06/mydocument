@@ -359,6 +359,8 @@ $ wget https://<url>
 $ history
 #show calender
 $ cal
+#show the diffrence between two files
+$ diff
 ```
 
 
@@ -409,8 +411,6 @@ alias la='ls -a'
 export <Env name>=<value>
 ```
 
-
-
 When you want to check  original command of alias 
 
 , you can use `$ type <alias name>` or `$ which <command>`.
@@ -420,13 +420,17 @@ Moreover you can check a `environmental variable` by using `$ echo $<envuronment
 End of this section I'll introduce representative environmental variable.
 
 
-
 | Environmental variable |       meaning       |     value <br>(not always correct)      |
 | :--------------------: | :-----------------: | :-------------------------------------: |
 |          HOME          | your home directory |              /home/\<User>              |
 |          PATH          | command search path | /home/\<User>/bin:/usr/local/bin ...etc |
 |          USER          |   your user name    |              \<User name>               |
 |         SHELL          |  your login shell   |         /bin/bash or /bin/tcsh          |
+
+#### Execise
+
+1. add `ls='ls -hF',ll='ls -l',la='la -a'` alias to ~/.bashrc
+1. add new command search path:`~/bin` to Environtmental variable:`PATH` in ~/.bashrc 
 
 
 
@@ -438,8 +442,8 @@ This is called shell script .
 
 I want to introduce the syntax but it is different whether your shell is B Shell or C Shell.   
 
-I'm used to using csh so I mainly explain csh grammar.
-
+I'm used to using csh so I mainly explain csh grammar 
+(However, csh has serious defects in its grammar and csh is deprecated for programming language)
 
 
 When you make shell script, you have to write `shebang` at first line of that file.

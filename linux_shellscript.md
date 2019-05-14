@@ -111,12 +111,13 @@ end
 Before running the shell script , you may have to add execute permission into its file.
 
 ```bash
-chmod 755 shellscript.sh
+$ chmod 755 shellscript.sh
+$ ./shellscript.sh
 ```
 
 
 
-#### Exercise
+#### Exercise_1
 
 1. copy `/home/onishi/mydocument/Linux_advance/` to `~`
 
@@ -134,8 +135,31 @@ Then each file have each text.
 
    `cat` command with wild card.
 
-     
+#### Exercise_2
 
+Make a program which show date from 2005/1/1 to 2010/12/31  on your display.
+Don't forget to consider leap year
+
+### command line argument
+We can pass value to shellscript as command line argument when we execute it.
+Shell script assign these value to specific shell variables.
+
+```bash
+$script.sh  aaa   bbb    ccc
+  <$0>     <$1>   <$2>   <$3>
+```
+example
+**print.sh**
+
+```bash
+#! /bin/tcsh -f
+echo $1
+```
+
+```bash
+$ ./print.sh 'Hello'
+Hello
+```
 ### bash
 
 誰か書いて！

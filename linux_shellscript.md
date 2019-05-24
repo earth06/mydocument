@@ -1,4 +1,4 @@
-## Shell script
+# Shell script
 
 you can write multiple commands on `.sh` file in advance and run them at the same time.
 
@@ -22,9 +22,9 @@ When you make shell script, you have to write `shebang` at first line of that fi
 set i = 1
 ```
 
-### csh
+## csh
 
-#### declare variable
+### declare variable
 
 * use `set`
 
@@ -43,7 +43,7 @@ $ echo $arr[1]
 10
 ```
 
-#### Math Operators
+### Math Operators
 
 When you want to calculate with variables , you have to put `@` at beginning of the line. 
 
@@ -60,7 +60,7 @@ echo $i
 
 
 
-#### Conditionals and Loops 
+### Conditionals and Loops 
 
 
 
@@ -117,7 +117,7 @@ $ ./shellscript.sh
 
 
 
-#### Exercise_1
+### Exercise_1
 
 1. copy `/home/onishi/mydocument/Linux_advance/` to `~`
 
@@ -135,10 +135,14 @@ Then each file have each text.
 
    `cat` command with wild card.
 
-#### Exercise_2
+### Exercise_2
 
 Make a program which show date from 2005/1/1 to 2010/12/31  on your display.
 Don't forget to consider leap year
+
+
+
+
 
 ### command line argument
 We can pass value to shellscript as command line argument when we execute it.
@@ -160,6 +164,43 @@ echo $1
 $ ./print.sh 'Hello'
 Hello
 ```
-### bash
+## bash
 
-誰か書いて！
+### declare variable
+
+### command replacement
+
+### command line arguments
+
+| variable  | meaning                                     |
+| --------- | ------------------------------------------- |
+| $0        | shellscript name                            |
+| $1,$2 ... |                                             |
+| $#        | the number of argument                      |
+| $@        | return list of arguments (ex)"$1"  "$2" ... |
+| $*        | (ex)"$1 $2  ..."                            |
+
+
+
+###  Treat any number of argument
+
+```bash
+for file in "$@"
+	do
+		<command>
+	done
+```
+
+### Separate last argument with the other ones
+
+```bash
+${@:$#} #get last argument
+#meaning
+${list_like:index No.:the number of slice}
+
+```
+
+# Reference
+
+ SB Creative(2015)　新しいLINUXの教科書
+

@@ -1,4 +1,6 @@
-# Statistical processing by gtool
+# Shell script with gtool
+
+
 
 ## Copy dataset
 
@@ -24,7 +26,7 @@ Check T.yy by gtcont
 gtcont map=1 color=20 T.yy
 ```
 
-Next ,make annual temperature from 2005 to 2009 at the same time by using shell script.
+### Q) make annual temperature from 2005 to 2009 at the same time by using shell script.
 
 Below code is incomplete.
 
@@ -34,9 +36,7 @@ set iyy = ?
 while ( $iyy <= ? )
 set INDIR = ?
 set OUTDIR = $INDIR
-
 gtavr $INDIR/T out:$OUTDIR/T.yy 
-
 end
 ```
 
@@ -48,7 +48,16 @@ gtoolのコマンドライン引数の先頭が数字の時gtoolがうまく動�
 
 日平均データを月平均データに変換する
 
-Let's make monthly temperature  as  `T_1, T_2, ... T_3` from  `T` by using shellscript
+### Q) Let's make monthly mean temperature  as  `T_1, T_2, ... T_3` from  `T` by using shellscript
+
+```bash
+#! /bin/tcsh
+set im = 1
+while ( $im <= ?)
+	gtavr T str=? end=? out:T_${im}
+@ iyy = $im + 1
+end
+```
 
 
 
@@ -60,28 +69,45 @@ Let's make monthly temperature  as  `T_1, T_2, ... T_3` from  `T` by using shell
 
 `cat` command is useful for concatenating each data into one file.
 
-
-**Q) concatenate each monthly data which made at previous section into one file.**
+### Q) concatenate each monthly data which made at previous section into one file.
 
 
 <details><summary>Answer</summary><div>
 
 ```bash
-$ cat 2005/T 2006/T 2007/T 2008/T 2009/T > T.yy
+$ cat 2005/T_1 2005/T_2 ... 2005/T_12 > T.mm
 ```
 </div></details>
 
-**Q)**
+※You can also solve this question by using while statement
 
-Then please make `T.mm` from `T` at the same time by  updating  Ch.2 script.
+Let's try that.
 
+### Q)Make monthly mean `T.mm` from daily `T` at the same time by  updating  Ch.2 script.
 
 ## 4. monthly => climatology 
 
-2.で求めた月平均から気候値を求める。
+Here, we should learn how to make climatology.
+
+Maybe , you can make it by using the technique  you have learned until now 
+
+### Q) make climatology between 2005 and 2009.
+
+DJF   
+
+MAM
+
+JJA
+
+SON
 
 ## More advanced operation
 
 より複雑な操作や、効率の良い処理を行いたい場合は直接Fortranで計算処理をする方がいいかも。
 
 pythonでもgtool形式のデータを読むモジュールを作成したので代用は可能。
+
+
+
+Please refer to gtool official document when you want to know gtool format ,plot etc...
+

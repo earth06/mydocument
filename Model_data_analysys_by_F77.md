@@ -20,9 +20,11 @@ Compare with observation
 ### Caliculate colmun mass by vertical integration
 
 質量濃度に関しては以下の式を計算するとカラム量を求めることができる
+
 $$
 column = \sum_{k=1}^{36}C_{mass}(k)\times\Delta z_k　\tag{1}
 $$
+
 ここで静水圧平衡の式から
 
 
@@ -31,13 +33,17 @@ $$
 $$
 
 ただし
+
 $$
 \Delta P_M(k) = | P_M(k+1)-P_M(k) |   \tag{3}
 $$
+
 またρは乾燥空気の密度を表し、気体の状態方程式から
+
 $$
 \rho_{air}= \frac{P(k)}{R_{air}T} \tag{4}
 $$
+
 以上からカラム量を求めることができる。
 
 <img src="https://github.com/earth06/Figure/blob/master/column.png?raw=true" height="30%" width="30%" align="left">

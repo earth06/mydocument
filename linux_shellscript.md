@@ -4,10 +4,10 @@ you can write multiple commands on `.sh` file in advance and run them at the sam
 
 This is called shell script .
 
-I want to introduce the syntax but it is different whether your shell is B Shell or C Shell.   
+I want to introduce the syntax but its syntax is different whether your shell is B Shell or C Shell.   
 
 I'm used to using csh so I mainly explain csh grammar 
-(However, csh has serious defects in its grammar and csh is deprecated for programming language)
+(However, csh has serious defects in its syntax so csh is deprecated for programming language)
 
 
 When you make shell script, you have to write `shebang` at first line of that file.
@@ -55,15 +55,40 @@ echo $i
 echo $i
 #11
 ```
+### Command line argument
+We can pass value to shellscript as command line argument when we execute it.
+Shell script assign these value to specific shell variables.
+
+```bash
+$script.sh  aaa   bbb    ccc
+  <$0>     <$1>   <$2>   <$3>
+```
+#### Example
+
+**print.sh**
+
+```bash
+#! /bin/tcsh -f
+echo $1
+```
+
+```bash
+$ ./print.sh 'Hello'
+Hello
+```
+
+Before running the shell script , you may have to add execute permission into the file.
+
+```bash
+$ chmod 755 print.sh
+$ ./print.sh
+```
 
 
+### Condition and Loops 
 
 
-
-### Conditionals and Loops 
-
-
-
+#### Condition
 ```bash
 if ( <conditional expression> ) then
 	<process>
@@ -96,7 +121,23 @@ endif
 |        -h file         | file is exist and it is symbolic link |
 |        -f file         | file is exist and it is normal file   |
 
-**Loops**
+
+
+#####  Example : evaluate leap year 
+
+```bash
+#! /bin/tcsh -f
+set flag = 0
+@ flag = $1 % 4
+if ( $flag == 0 ) then
+	echo "$iyy is leap year "
+else 
+	echo "$iyy is not leap yaer"
+```
+
+
+
+#### Loops
 
 
 
@@ -106,18 +147,28 @@ while ( <conditional expression> )
 end
 ```
 
-
-
-Before running the shell script , you may have to add execute permission into its file.
+##### Example :print multiplication table
 
 ```bash
-$ chmod 755 shellscript.sh
-$ ./shellscript.sh
+#! /bin/tcsh -f
+set i = 1
+set j = 1
+set ans = 0
+while ( $i <= 9 )
+	while ( $j <= 9)
+@		ans = $i * $j
+		echo "$i X $j = $ans"
+@  		j = $j + 1
+	end
+@   i = $i + 1
+@   j = 1
+end
+
 ```
 
 
 
-### Exercise_1
+#### Exercise_1
 
 1. copy `/home/onishi/mydocument/Linux_advance/` to `~`
 
@@ -129,41 +180,17 @@ This directory have `./$iyy/test_${iyy}.txt` .
 
 Then each file have each text.
 
-3. Please concatenate its text and output into new file `test_all.txt`
+3. Please concatenate those text and output into new file:`test_all.txt`
 
-   I recommend you to use `cat` command. To solve this exercise you can use not only shell script but also
+   I recommend you to use `cat` command. To solve this exercise you can use not only shell script but also `cat` command with wild card.
 
-   `cat` command with wild card.
 
-### Exercise_2
+#### Exercise_2
 
 Make a program which show date from 2005/1/1 to 2010/12/31  on your display.
 Don't forget to consider leap year
 
 
-
-
-
-### command line argument
-We can pass value to shellscript as command line argument when we execute it.
-Shell script assign these value to specific shell variables.
-
-```bash
-$script.sh  aaa   bbb    ccc
-  <$0>     <$1>   <$2>   <$3>
-```
-example
-**print.sh**
-
-```bash
-#! /bin/tcsh -f
-echo $1
-```
-
-```bash
-$ ./print.sh 'Hello'
-Hello
-```
 ## bash
 
 ### declare variable

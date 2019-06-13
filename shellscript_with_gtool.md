@@ -1,3 +1,58 @@
+# Gtool Basic
+
+Gtoolでよくあるトラブルは、
+
+* 他人のディレクトリにいるときにコマンドが実行できない。
+* ディレクトリ名に`.`が含まれていたりすると正常に動作しない
+* 描画時にはローカルPC上で`Xサーバー`を起動しておく必要がある。
+
+中身を確認したりするには便利だが、複雑なことをやろうとすると、少し苦しい.
+
+よく使うコマンドは以下である。
+
+## Contour plot
+
+```bash
+gtcont map=1 color=20 <filename> 
+```
+### print data
+
+
+## average time(gtavr)
+```bash
+gtavr 
+```
+## Addtion (gtadd)
+```bash
+gtadd
+```
+## Subtraction (gtsub)
+```bash
+gtsub
+```
+## Multiplication (gtmlt)
+```bash
+gtmlt
+```
+## Division (gtdiv)
+```bash
+gtdiv
+```
+## Show data as text(gtshow)
+```bash
+gtshow
+```
+## Edit Header info(gtset)
+```bash
+gtset
+```
+## Slicing data(gtsel)
+```bash
+gtsel 
+```
+
+
+
 # Shell script with gtool
 
 

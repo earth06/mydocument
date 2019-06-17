@@ -1,10 +1,12 @@
 # Gtool Basic
 
-Gtoolでよくあるトラブルは、
+Trouble that happens often is mainly below reasons. 
 
-* 他人のディレクトリにいるときにコマンドが実行できない。
-* ディレクトリ名に`.`が含まれていたりすると正常に動作しない
-* 描画時にはローカルPC上で`Xサーバー`を起動しておく必要がある。
+* Permission is denied when you try to run gtool  even though you stay in other's directory.
+* gtool dosen't work correctly when beginning character is  `./` 
+* We have to be running `X server` on local PC before plotting
+
+Almost all of the case,option and file order don't influence the result. 
 
 中身を確認したりするには便利だが、複雑なことをやろうとすると、少し苦しい.
 
@@ -12,46 +14,130 @@ Gtoolでよくあるトラブルは、
 
 ## Contour plot
 
-```bash
-gtcont map=1 color=20 <filename> 
+```bash 
+gtcont map=1 color=20 <input file> 
+<argument>
+[args] [type]       [ meaning]                  [example]       
+color  int    : the number of color            color=20
+range  float  : set contour range              range=0,100
+str    int    : set begining of data timestep  str=1
+end    int    : set end of data timestep       end=2
+fact   float  : multiply fact and input data   fact=10
+x,y,z  int    : slicing dimension                  x=1 ,z=30 ,y=0
 ```
-### print data
+### Generate postscript file
+
+```bash
+gtcont <input file> str=1 end=1 -print ps:<output file>.ps
+```
+
+add `-print` option and write output file name after`ps:` .
+
+you should add `.ps` extension to output file.
 
 
 ## average time(gtavr)
 ```bash
-gtavr 
+gtavr <input file> out:<output file>
+<argument>
+[args] [type]       [ meaning]                  [example]
+str    int    : set begining of data timestep  str=1
+end    int    : set end of data timestep       end=2
+fact   float  : multiply fact and input data   fact=10
+
+<example>
+gtavr mc_bc str=1 end=30 out:mc_bc_jan
 ```
-## Addtion (gtadd)
+Basically, This average operation  is used in order to get time average of data.
+
+
+## Four arithmetic operation
+### Addtion (gtadd)
+
 ```bash
-gtadd
+gtadd <input file1> <input file2> out:<output file>
 ```
-## Subtraction (gtsub)
+### Subtraction (gtsub)
 ```bash
-gtsub
+gtsub <input file1> <input file2> out:<output file>
 ```
-## Multiplication (gtmlt)
+### Multiplication (gtmlt)
 ```bash
-gtmlt
+gtmlt <input file1> <input file2> out:<output file>
 ```
-## Division (gtdiv)
+### Division (gtdiv)
 ```bash
-gtdiv
+gtdiv <input file1> <input file2> out:<output file>
 ```
 ## Show data as text(gtshow)
+
 ```bash
-gtshow
+gtshow <input file>
 ```
+This command is often used when we want to check header information of input file
+
+```bash
+<exmaple>
+gtshow mc_bc |head -n 60
+```
+
 ## Edit Header info(gtset)
+
 ```bash
-gtset
+gtset <input file> title='new title' ...  <output file>
 ```
+rewrite header
+
+See Gtool Document in detail 
+
+
+
 ## Slicing data(gtsel)
+
 ```bash
-gtsel 
+gtsel z=1 <inputfile> out:<output file>
+```
+
+Slicing data.
+
+We often use this command to get only surface data from 3dimensional  data.
+
+(Because 3D hourly data is so large that I have to wait  for a longtime to read the original data ...)
+
+
+
+# About model grid
+
+
+
+![model_grid.png](https://github.com/earth06/Figure/blob/master/model_grid.png?raw=true)
+
+default model grid is  128 X 64 X 36 grid called `t42`
+
+``` 
+  the number of grid      meaning           difinition file
+x         128            :logitude          GTAXLOC.GLON128
+y          64            :latitude          GTAXLOC.GGLA64
+z          36            :sgima level       GTAXLOC.HETA36
+```
+
+GRID difinition file are saved  at `GTAXDIR`,and you can show them by `gtshow GTAXLOC.GGLA64`
+
+Model vertical level is `sigma`
+you can convert it to pressure level by using GTAXLOC.HETA36
+
+```python
+for k in range(36):
+    P[i,lat,lon]=a[i]+b[i]*Ps[i,lat,lon]
 ```
 
 
+
+# Model (Gtool) data structure
+
+![gtool_data_structure2.png](https://github.com/earth06/Figure/blob/master/gtool_data_structure2.png?raw=true)
+
+Fortran header/footer 
 
 # Shell script with gtool
 
@@ -95,9 +181,7 @@ gtavr $INDIR/T out:$OUTDIR/T.yy
 end
 ```
 
-### Annotation
 
-gtoolのコマンドライン引数の先頭が数字の時gtoolがうまく動かない。
 
 ## 2. daily => monthly
 

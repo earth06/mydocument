@@ -35,8 +35,35 @@ add `-print` option and write output file name after`ps:` .
 
 you should add `.ps` extension to output file.
 
+But you can't open post script file easily especially on Windows PC. So I recommend you to 
+
+convert ps file to png file like below.
+
+1. save this program under ~/bin
+
+**convert.sh**
+```bash
+#! /bin/bash
+input=$1
+output=$(echo "$1" | awk 'BEGIN{ FS ="."}{ print $1}').png
+convert -density 100 -rotate 90 $input $output
+```
+
+2. run `convert.sh <filename>`
+```bash
+$ convert.sh  file.ps
+```
+
+​	3. downloading file from local
+
+```bash
+scp -r <user>@<ip address>:<filepath> <local>
+```
+
+
 
 ## average time(gtavr)
+
 ```bash
 gtavr <input file> out:<output file>
 <argument>
